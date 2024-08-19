@@ -1,5 +1,10 @@
 // Write your JavaScript code here!
 
+var launchForm = document.getElementById("launchForm");
+var launchStatusCheck = document.getElementById("launchStatusCheck");
+var missionTarget = document.getElementById("missionTarget")
+
+
 window.addEventListener("load", function() {
 
     let listedPlanets;
