@@ -2,6 +2,7 @@
 
 require('cross-fetch/polyfill');
 
+
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     let missionTarget = document.getElementById("missionTarget");
     // Here is the HTML formatting for our mission target div.
@@ -47,16 +48,18 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     var readyFlag = "ready";
 
     //validate all text is filled out correctly, don't display otherwise
+
+    //alert isn't working on test, chaning to console log
     if (pilot==""||copilot==""||fuelLevel==""||cargoLevel==""){
-        //alert("Make sure that you fill out each field")
+       console.log("Make sure that you fill out each field")
         readyFlag = "no change";
     }
     else if(validateInput(pilot)!="Not a Number"||validateInput(copilot)!="Not a Number"){
-        //alert(`Make sure that "Pilot Name" and "Co-Pilot Name" are both entered as names`);
+        console.log(`Make sure that "Pilot Name" and "Co-Pilot Name" are both entered as names`);
         readyFlag = "no change";
     }
     else if(validateInput(fuelLevel)!="Is a Number"||validateInput(cargoLevel)!="Is a Number"){
-        //alert(`Make sure that "Fuel Level (L)" and "Cargo Mass (kg)" are both entered as numbers`);
+        console.log(`Make sure that "Fuel Level (L)" and "Cargo Mass (kg)" are both entered as numbers`);
         readyFlag = "no change";
    
     }
@@ -103,10 +106,6 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         cargoStatus.innerHTML="Cargo mass low enough for launch"
     }
     
-
-    
-
-
     //check ready Flag
     if (readyFlag == "not ready"||readyFlag == "no change"){
         launchStatus.style.color = "red";
@@ -125,7 +124,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  async function myFetch() {
      let planetsReturned;
      planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-
+        //return response to planets returned
+        return response.json();
 
          });
  
@@ -133,6 +133,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function pickPlanet(planets) {
+    //return random element
+    let randPlanet = Math.floor(Math.random() * planets.length)
+    return planets[randPlanet];
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
