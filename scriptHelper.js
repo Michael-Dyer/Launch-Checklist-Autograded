@@ -51,20 +51,33 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
     //alert isn't working on test, chaning to console log
     if (pilot==""||copilot==""||fuelLevel==""||cargoLevel==""){
-       console.log("Make sure that you fill out each field")
+        document.defaultView.alert("Make sure that you fill out each field")
+        //expect(alert).toHaveBeenCalledWith('hello');
         readyFlag = "no change";
+        list.style.visibility = "hidden";
+        launchStatus.style.color = "black";
+        launchStatus.innerHTML = "Incorrect Values submitted";
+
     }
     else if(validateInput(pilot)!="Not a Number"||validateInput(copilot)!="Not a Number"){
-        console.log(`Make sure that "Pilot Name" and "Co-Pilot Name" are both entered as names`);
+        document.defaultView.alert(`Make sure that "Pilot Name" and "Co-Pilot Name" are both entered as names`);
         readyFlag = "no change";
+        list.style.visibility = "hidden";
+        launchStatus.style.color = "black";
+        launchStatus.innerHTML = "Incorrect Values submitted";
+
     }
     else if(validateInput(fuelLevel)!="Is a Number"||validateInput(cargoLevel)!="Is a Number"){
-        console.log(`Make sure that "Fuel Level (L)" and "Cargo Mass (kg)" are both entered as numbers`);
+        document.defaultView.alert(`Make sure that "Fuel Level (L)" and "Cargo Mass (kg)" are both entered as numbers`);
         readyFlag = "no change";
+        list.style.visibility = "hidden";
+        launchStatus.style.color = "black";
+        launchStatus.innerHTML = "Incorrect Values submitted";
+
    
     }
   
-    list.style.visibility = "visible";
+    //list.style.visibility = "visible";
 
 
     //make sure input is correct values
@@ -85,7 +98,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
 
     if (fuelLevel<10000){
-        list.style.visibility = "visible";
+        //list.style.visibility = "visible";
         fuelStatus.innerHTML="Fuel level too low for launch"
 
 
@@ -97,7 +110,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     
 
     if(cargoLevel>10000){
-        list.style.visibility = "visible";
+        //list.style.visibility = "visible";
         cargoStatus.innerHTML="Cargo mass too heavy for launch"
 
         readyFlag="not ready";
@@ -107,11 +120,13 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
     
     //check ready Flag
-    if (readyFlag == "not ready"||readyFlag == "no change"){
+    if (readyFlag == "not ready"){
+        list.style.visibility = "visible";
         launchStatus.style.color = "red";
         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
     }
     else if(readyFlag == "ready"){
+        list.style.visibility = "visible";
         launchStatus.style.color = "green";
         launchStatus.innerHTML = "Shuttle is Ready for Launch";
     }
