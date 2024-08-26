@@ -21,7 +21,7 @@ window.addEventListener("load", function() {
         var fuelLevel = document.getElementById("fuelLevel");
         var cargoLevel = document.getElementById("cargoLevel");
 
-        formSubmission(document, list,pilot.value,copilot.value,fuelLevel.value,cargoLevel.value);
+        formSubmission(document, list, pilot.value,copilot.value,fuelLevel.value,cargoLevel.value);
 
     })
 
